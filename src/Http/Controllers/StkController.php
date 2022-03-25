@@ -2,7 +2,7 @@
 
 namespace Helaplus\Stk\Http\Controllers;
 
-use App\Models\StkLog;
+use Helaplus\Stk\StkLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -37,7 +37,7 @@ class StkController extends Controller
         exit;
     }
 
-    public function logRequest($data){ 
+    public function logRequest($data){
         $stklog = new StkLog();
         $stklog->phone = $data['PartyA'];
         $stklog->amount = $data['Amount'];
