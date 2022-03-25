@@ -2,7 +2,7 @@
 
 namespace Helaplus\Stk\Http\Controllers;
 
-use Helaplus\Stk\StkLog;
+use Helaplus\Stk\Models\StkLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
