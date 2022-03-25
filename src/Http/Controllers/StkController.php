@@ -44,12 +44,12 @@ class StkController extends Controller
 
     public function receiver(Request $request){
         $request = $request->all();
-        $stklog = StkLog::whereCheckoutRequestId($request['body']['stkCallback']['CheckoutRequestID'])->first();
+        $stklog = StkLog::whereCheckoutRequestId($request['Body']['stkCallback']['CheckoutRequestID'])->first();
         if($request['body']['stkCallback']['ResultCode'] == 0){
-            $stklog->status = 2;
+            $stklog->status = 2;  
             $stklog->response = $stklog->response.PHP_EOL.json_encode($request);
             $stklog->save();
-        } 
+        }
 
         return json_encode(['success'=>1,'data'=>$stklog]);
     }
