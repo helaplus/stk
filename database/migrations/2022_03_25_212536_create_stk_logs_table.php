@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('checkout_request_id')->nullable();
             $table->text('details')->nullable();
             $table->text('response')->nullable();
-            $table->integer('status')->nullable(0);
+            $table->integer('status')->default(0); 
             $table->timestamps();
         });
     }
