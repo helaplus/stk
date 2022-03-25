@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('stk_logs', function (Blueprint $table) {
             $table->id();
+            $table->string('phone')->default(0);
+            $table->string('amount')->default(0);
+            $table->string('ref')->default(0);
+            $table->string('checkout_request_id')->nullable();
+            $table->text('details')->nullable();
+            $table->text('response')->nullable();
+            $table->integer('status')->nullable(0);
             $table->timestamps();
         });
     }

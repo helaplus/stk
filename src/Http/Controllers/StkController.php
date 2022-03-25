@@ -2,6 +2,7 @@
 
 namespace Helaplus\Stk\Http\Controllers;
 
+use App\Models\StkLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -25,7 +26,24 @@ class StkController extends Controller
             $headers = [
                 'Content-Type: application/json',
             ];
+            //log request
+            $stklog = self::logRequest($data);
             $response = Http::withHeaders($headers)->withToken(config('stk.helaplus_api_key'))->post($apiURL, $data);
             return $response;
+    }
+
+    public function receiver(Request $request){
+        print_r($request->all());
+        exit;
+    }
+
+    public function logRequest($data){ 
+        $stklog = new StkLog();
+        $stklog->phone = $data['PartyA'];
+        $stklog->amount = $data['Amount'];
+        $stklog->ref = $data['AccountReference'];
+        $stklog->details = json_encode($data);
+        $stklog->save();
+        return $stklog;
     }
 }
