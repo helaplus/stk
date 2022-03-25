@@ -49,8 +49,9 @@ class StkController extends Controller
             $stklog->status = 2;
             $stklog->response = $stklog->response.PHP_EOL.json_encode($request);
             $stklog->save();
-        }
+        } 
 
+        return json_encode(['success'=>1,'data'=>$stklog]);
     }
 
     public function logRequest($data){
