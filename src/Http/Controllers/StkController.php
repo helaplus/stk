@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Http;
 class StkController extends Controller
 {
     public function initiate($amount,$phone,$receiver,$ref,$description,$callbackurl,$commandID="CustomerPayBillOnline"){
-            sleep(env('STK_DELAY_TIME',10));//introduced this to ensure we wait for ussd termination first default 10 seconds
+            $delay = env('STK_DELAY_TIME',0);
             $data = array();
             $data['BusinessShortCode'] = config('stk.shortcode');
             $data['PassKey'] = config('stk.passkey');
             $apiURL = config('stk.endpoint');
             $data['CommandID'] = $commandID;
+            $data['delay'] = $delay;
             $data['Password'] = "";
             $data['Timestamp'] = "";
             $data['Amount'] = $amount;
