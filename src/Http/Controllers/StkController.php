@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 class StkController extends Controller
 {
     public function initiate($amount,$phone,$receiver,$ref,$description,$callbackurl,$commandID="CustomerPayBillOnline"){
+            sleep(5);//introduced this to ensure we wait for ussd termination first
             $data = array();
             $data['BusinessShortCode'] = config('stk.shortcode');
             $data['PassKey'] = config('stk.passkey');
@@ -46,7 +47,7 @@ class StkController extends Controller
         $request = $request->all();
         $stklog = StkLog::whereCheckoutRequestId($request['Body']['stkCallback']['CheckoutRequestID'])->first();
         if($request['Body']['stkCallback']['ResultCode'] == 0){
-            $stklog->status = 2; 
+            $stklog->status = 2;
             $stklog->response = $stklog->response.PHP_EOL.json_encode($request);
             $stklog->save();
         }
