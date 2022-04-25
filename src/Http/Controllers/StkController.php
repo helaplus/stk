@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Http;
 
 class StkController extends Controller
 {
-    public function initiate($amount,$phone,$receiver,$ref,$description,$callbackurl,$commandID="CustomerPayBillOnline"){
+    public function initiate($amount,$phone,$receiver,$ref,$description,$callbackurl,$commandID="CustomerPayBillOnline",$shortcode=null,$passkey=null){
             $delay = env('STK_DELAY_TIME',0);
             $data = array();
-            $data['BusinessShortCode'] = config('stk.shortcode');
-            $data['PassKey'] = config('stk.passkey');
+            $shortcode =!null ? $data['BusinessShortCode'] = $shortcode : config('stk.shortcode',$shortcode);
+            $passkey =!null ? $data['PassKey'] = $passkey : config('stk.shortcode',$shortcode);
             $apiURL = config('stk.endpoint');
             $data['CommandID'] = $commandID;
             $data['delay'] = $delay;
