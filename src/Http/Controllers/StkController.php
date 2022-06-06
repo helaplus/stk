@@ -44,11 +44,7 @@ class StkController extends Controller
                     $stklog->checkout_request_id = $response['data']['CheckoutRequestID'];
                     $stklog->save();
                 }
-            }else{
-                $stklog->response = json_encode($response);
-                $stklog->checkout_request_id = $response['data']['CheckoutRequestID'];
-                $stklog->save();
-            }
+            } 
             return $response;
     }
 
