@@ -32,8 +32,8 @@ class StkController extends Controller
             //log request
             $stklog = self::logRequest($data);
             $response = Http::withHeaders($headers)->withToken(config('stk.helaplus_api_key'))->post($apiURL, $data);
-            $response = $response->json();
-            if(isset($response['success'])){
+            $response = (array) $response->json();
+            if(isset($response['success'])){ 
                 if($response['success'] == 1){
                     $stklog->status = 1;
                     $stklog->response = json_encode($response);
