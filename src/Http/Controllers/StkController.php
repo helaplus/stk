@@ -33,13 +33,21 @@ class StkController extends Controller
             $stklog = self::logRequest($data);
             $response = Http::withHeaders($headers)->withToken(config('stk.helaplus_api_key'))->post($apiURL, $data);
             $response = (array) $response->json();
-            if(isset($response['success'])){ 
+            if(isset($response['success'])){
                 if($response['success'] == 1){
                     $stklog->status = 1;
                     $stklog->response = json_encode($response);
                     $stklog->checkout_request_id = $response['data']['CheckoutRequestID'];
                     $stklog->save();
+                }else{
+                    $stklog->response = json_encode($response);
+                    $stklog->checkout_request_id = $response['data']['CheckoutRequestID'];
+                    $stklog->save();
                 }
+            }else{
+                $stklog->response = json_encode($response);
+                $stklog->checkout_request_id = $response['data']['CheckoutRequestID'];
+                $stklog->save();
             }
             return $response;
     }
